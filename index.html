@@ -6,55 +6,18 @@
     <title>mariobruno.dev // Code Mode 💻</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Fira Code', 'Courier New', monospace; }
-        body { background-color: #0d1117; color: #c9d1d9; display: flex; height: 100vh; overflow: hidden; perspective: 1000px; }
+        body { background-color: #080b10; color: #c9d1d9; display: flex; height: 100vh; overflow: hidden; perspective: 1000px; }
         
-        /* Lado Esquerdo: Editor Estilo VS Code */
-        .editor { 
-            width: 55%; 
-            background: #0d1117; 
-            padding: 20px 0; 
-            border-right: 1px solid #21262d; 
-            overflow-y: auto; 
-            overflow-x: auto;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .code-container {
-            display: table;
-            width: 100%;
-        }
-
-        .line {
-            display: table-row;
-            white-space: pre;
-        }
-
-        .num { 
-            display: table-cell;
-            width: 45px; 
-            color: #484f58; 
-            user-select: none; 
-            text-align: right; 
-            padding-right: 15px; 
-            font-size: 12px;
-        }
-
-        .code-content {
-            display: table-cell;
-            padding-left: 5px;
-        }
-
-        /* Syntax Highlighting (Cores idênticas à imagem) */
-        .tag { color: #7ee787; } /* Tags HTML em verde */
-        .attr { color: #79c0ff; } /* Atributos em azul claro */
-        .val-str { color: #a5d6ff; } /* Strings/Valores em azul */
-        .comment { color: #8b949e; font-style: italic; } /* Comentários */
-        .selector { color: #ff7b72; } /* Seletores CSS em rosa/vermelho */
-        .prop { color: #79c0ff; } /* Propriedades CSS em azul */
-        .val { color: #a5d6ff; } /* Valores CSS */
+        /* Lado Esquerdo: O Editor de Código */
+        .editor { width: 55%; background: #0d1117; padding: 40px; border-right: 1px solid #21262d; overflow-y: auto; }
+        .line { display: flex; margin-bottom: 6px; font-size: 14px; line-height: 1.5; }
+        .num { width: 30px; color: #484f58; user-select: none; text-align: right; margin-right: 20px; flex-shrink: 0; }
+        .comment { color: #8b949e; font-style: italic; }
+        .selector { color: #ff7b72; }
+        .prop { color: #79c0ff; }
+        .val { color: #a5d6ff; }
         
-        /* Lado Direito: Preview */
+        /* Lado Direito: O Resultado do Design (Fundo Tech com Nebulosa) */
         .preview { 
             width: 45%; 
             display: flex; 
@@ -81,10 +44,14 @@
             max-width: 390px; 
             z-index: 10; 
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            
+            /* Animação de Entrada */
             opacity: 0;
             transform: translateY(20px);
             animation: surgirSuave 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-delay: 0.2s;
+            
+            /* Efeito 3D */
             transform-style: preserve-3d;
             transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
         }
@@ -96,6 +63,7 @@
         h1 { font-size: 24px; color: #ffffff; margin-bottom: 12px; font-family: sans-serif; font-weight: 700; transform: translateZ(30px); letter-spacing: -0.5px; }
         p { font-size: 14px; color: #94a3b8; line-height: 1.6; margin-bottom: 28px; font-family: sans-serif; transform: translateZ(20px); }
         
+        /* 🟩 Botão Verde Claro e Translúcido */
         .btn { 
             display: block; 
             text-align: center; 
@@ -129,28 +97,17 @@
 
     <!-- LADO ESQUERDO: IDE -->
     <div class="editor">
-        <div class="code-container">
-            <div class="line"><span class="num">1</span><span class="code-content"><span class="tag">&lt;!DOCTYPE html&gt;</span></span></div>
-            <div class="line"><span class="num">2</span><span class="code-content"><span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val-str">"pt-BR"</span><span class="tag">&gt;</span></span></div>
-            <div class="line"><span class="num">3</span><span class="code-content"><span class="tag">&lt;head&gt;</span></span></div>
-            <div class="line"><span class="num">4</span><span class="code-content">    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val-str">"UTF-8"</span><span class="tag">&gt;</span></span></div>
-            <div class="line"><span class="num">5</span><span class="code-content">    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val-str">"viewport"</span> <span class="attr">content</span>=<span class="val-str">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span></span></div>
-            <div class="line"><span class="num">6</span><span class="code-content">    <span class="tag">&lt;title&gt;</span>mariobruno.dev // Code Mode 💻<span class="tag">&lt;/title&gt;</span></span></div>
-            <div class="line"><span class="num">7</span><span class="code-content">    <span class="tag">&lt;style&gt;</span></span></div>
-            <div class="line"><span class="num">8</span><span class="code-content">        <span class="selector">*</span> { <span class="prop">margin</span>: <span class="val">0</span>; <span class="prop">padding</span>: <span class="val">0</span>; <span class="prop">box-sizing</span>: <span class="val">border-box</span>; <span class="prop">font-family</span>: <span class="val">'Fira Code', 'Courier New', monospace</span>; }</span></div>
-            <div class="line"><span class="num">9</span><span class="code-content">        <span class="selector">body</span> { <span class="prop">background-color</span>: <span class="val">#080b10</span>; <span class="prop">color</span>: <span class="val">#c9d1d9</span>; <span class="prop">display</span>: <span class="val">flex</span>; <span class="prop">height</span>: <span class="val">100vh</span>; <span class="prop">overflow</span>: <span class="val">hidden</span>; <span class="prop">perspective</span>: <span class="val">1000px</span>; }</span></div>
-            <div class="line"><span class="num">10</span><span class="code-content"></span></div>
-            <div class="line"><span class="num">11</span><span class="code-content">        <span class="comment">/* Lado Esquerdo: O Editor de Código */</span></span></div>
-            <div class="line"><span class="num">12</span><span class="code-content">        <span class="selector">.editor</span> { <span class="prop">width</span>: <span class="val">55%</span>; <span class="prop">background</span>: <span class="val">#0d1117</span>; <span class="prop">padding</span>: <span class="val">40px</span>; <span class="prop">border-right</span>: <span class="val">1px solid #21262d</span>; <span class="prop">overflow-y</span>: <span class="val">auto</span>; }</span></div>
-            <div class="line"><span class="num">13</span><span class="code-content">        <span class="selector">.line</span> { <span class="prop">display</span>: <span class="val">flex</span>; <span class="prop">margin-bottom</span>: <span class="val">6px</span>; <span class="prop">font-size</span>: <span class="val">14px</span>; <span class="prop">line-height</span>: <span class="val">1.5</span>; }</span></div>
-            <div class="line"><span class="num">14</span><span class="code-content">        <span class="selector">.num</span> { <span class="prop">width</span>: <span class="val">30px</span>; <span class="prop">color</span>: <span class="val">#484f58</span>; <span class="prop">user-select</span>: <span class="val">none</span>; <span class="prop">text-align</span>: <span class="val">right</span>; <span class="prop">margin-right</span>: <span class="val">20px</span>; <span class="prop">flex-shrink</span>: <span class="val">0</span>; }</span></div>
-            <div class="line"><span class="num">15</span><span class="code-content">        <span class="selector">.comment</span> { <span class="prop">color</span>: <span class="val">#8b949e</span>; <span class="prop">font-style</span>: <span class="val">italic</span>; }</span></div>
-            <div class="line"><span class="num">16</span><span class="code-content">        <span class="selector">.selector</span> { <span class="prop">color</span>: <span class="val">#ff7b72</span>; }</span></div>
-            <div class="line"><span class="num">17</span><span class="code-content">        <span class="selector">.prop</span> { <span class="prop">color</span>: <span class="val">#79c0ff</span>; }</span></div>
-            <div class="line"><span class="num">18</span><span class="code-content">        <span class="selector">.val</span> { <span class="prop">color</span>: <span class="val">#a5d6ff</span>; }</span></div>
-            <div class="line"><span class="num">19</span><span class="code-content"></span></div>
-            <div class="line"><span class="num">20</span><span class="code-content">        <span class="comment">/* Lado Direito: O Resultado do Design (Fundo Tech com Nebulosa) */</span></span></div>
-        </div>
+        <div class="line"><span class="num">1</span><span class="comment">/* CONSTRUINDO PORTFÓLIO */</span></div>
+        <div class="line"><span class="num">2</span><span class="selector">#mario-bruno</span> {</div>
+        <div class="line"><span class="num">3</span><span class="prop">&nbsp;&nbsp;foco-carreira</span>: <span class="val">"UX/UI para Aplicativos"</span>;</div>
+        <div class="line"><span class="num">4</span><span class="prop">&nbsp;&nbsp;stack-atual</span>: <span class="val">Figma, HTML5, CSS3</span>;</div>
+        <div class="line"><span class="num">5</span><span class="prop">&nbsp;&nbsp;status-atual</span>: <span class="val">"Estudando & Codando"</span>;</div>
+        <div class="line"><span class="num">6</span><span class="prop">&nbsp;&nbsp;objetivo</span>: <span class="val">"Criar Soluções Criativas"</span>;</div>
+        <div class="line"><span class="num">7</span><span class="selector">}</span></div>
+        <div class="line"><span class="num">8</span></div>
+        <div class="line"><span class="num">9</span><span class="selector">.portfolio-status</span> {</div>
+        <div class="line"><span class="num">10</span><span class="prop">&nbsp;&nbsp;progresso</span>: <span class="val">10%</span>;</div>
+        <div class="line"><span class="num">11</span><span class="selector">}</span></div>
     </div>
 
     <!-- LADO DIREITO: INTERFACE -->
@@ -162,7 +119,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT PARA CALCULAR O EFEITO DE PRESSÃO 3D -->
     <script>
         const card = document.getElementById('interactive-card');
 
